@@ -76,6 +76,23 @@ public class MuserResource {
 
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ObjectResp findById(@PathParam("id") Long id){
+        ObjectResp objResp = new ObjectResp();
+        try {
+            objResp.setCode(Response.Status.OK.getStatusCode());
+            objResp.setMessage(Response.Status.OK.getReasonPhrase());
+            objResp.setData(repo.findById(id));
+        }catch (Exception e){
+            e.printStackTrace();
+            objResp.setCode(Response.Status.BAD_REQUEST.getStatusCode());
+            objResp.setMessage(Response.Status.BAD_REQUEST.getReasonPhrase());
+        }
+        return objResp;
+    }
+
 
     @POST
     @Transactional

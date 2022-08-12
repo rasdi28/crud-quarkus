@@ -125,5 +125,20 @@ public class MahasiswaResource {
         return objResp;
     }
 
+    @GET
+    @Consumes("application/json")
+    @Produces("application/json")
+    public ObjectResp getHello(){
+        ObjectResp objResp = new ObjectResp();
+        try {
+            System.out.println("Hello World");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return objResp;
+    }
+
 
 }
