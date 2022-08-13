@@ -72,5 +72,44 @@ public class MacademicResource {
         return objResp;
     }
 
+    @DELETE
+    @Transactional
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ObjectResp delete(@PathParam("id") Long id){
+        ObjectResp objResp = new ObjectResp();
+        try {
+            repo.deleteById(id);
+            objResp.setCode(Response.Status.OK.getStatusCode());
+            objResp.setMessage("Success Deleted");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return objResp;
+    }
+
+
+    @PUT
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ObjectResp update(@PathParam("id") Long id, Macademic obj){
+        ObjectResp objResp = new ObjectResp();
+        try {
+            repo.getEntityManager().merge(obj);
+            objResp.setCode(Response.Status.OK.getStatusCode());
+            objResp.setMessage(Response.Status.OK.getReasonPhrase());
+            objResp.setData(obj);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return objResp;
+    }
+
+
 
 }
